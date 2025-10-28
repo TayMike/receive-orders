@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: FIAP
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      group-id: notificacao-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.fase4.fiap.entity.message.*"
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  mail:
+    host: smtp.myisp.com
+    port: 587
+    username: taysonlincon.76@hotmail.com
+    password: K7d6I9j8$@
+    from: taysonlincon.76@hotmail.com
+    baseUrl: http://localhost:8080
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+app:
+  url:
+    base: http://localhost:8080
