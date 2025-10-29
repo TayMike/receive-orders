@@ -1,0 +1,6 @@
+## cucumber
+cucumber:
+  glue: com.fiap
+  plugin: pretty,html:target/cucumber-reports/cucumber.html
+  execution:
+    dry-runs: false

@@ -2,9 +2,7 @@ package com.fase4.fiap.infraestructure.auxiliary.configuration.db.schema;
 
 import com.fase4.fiap.entity.apartamento.model.Apartamento;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "apartamento")
+@Table(name = "apartamento", uniqueConstraints = @UniqueConstraint(columnNames = {"torre", "andar", "numero"}))
 public class ApartamentoSchema implements Serializable {
 
     @Id
@@ -24,16 +22,15 @@ public class ApartamentoSchema implements Serializable {
     private UUID id;
 
     @Column(nullable = false, length = 1)
-    @NotBlank(message = "Torre não pode ser nula")
-    @Size(min = 1, max = 1, message = "Torre deve ter exatamente 1 caractere")
+    @NotBlank @Size(min = 1, max = 1)
     private char torre;
 
-    @Column(name = "numero", nullable = false)
-    @NotNull(message = "Número não pode ser nulo")
+    @Column(nullable = false)
+    @Min(1) @Max(127)
     private byte numero;
 
-    @Column(name = "andar", nullable = false)
-    @NotNull(message = "Andar não pode ser nulo")
+    @Column(nullable = false)
+    @Min(1) @Max(127)
     private byte andar;
 
     public ApartamentoSchema(Apartamento apartamento) {
@@ -44,14 +41,8 @@ public class ApartamentoSchema implements Serializable {
     }
 
     public Apartamento toEntity() {
-        Apartamento apartamento = new Apartamento(
-                this.torre,
-                this.andar,
-                this.numero
-        );
-
-        apartamento.setId(this.getId());
-        return apartamento;
+        Apartamento apt = new Apartamento(torre, andar, numero);
+        apt.setId(id);
+        return apt;
     }
-
 }

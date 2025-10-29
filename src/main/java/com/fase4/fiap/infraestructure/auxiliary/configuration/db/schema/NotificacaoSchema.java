@@ -10,7 +10,14 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "notificacao")
+@Table(
+        name = "notificacao",
+        indexes = {
+                @Index(name = "idx_notificacao_apartamento", columnList = "apartamento_id"),
+                @Index(name = "idx_notificacao_data_envio", columnList = "data_envio DESC"),
+                @Index(name = "idx_notificacao_lido", columnList = "lido")
+        }
+)
 @Getter @Setter @NoArgsConstructor
 public class NotificacaoSchema {
 
@@ -21,7 +28,7 @@ public class NotificacaoSchema {
     @Column(name = "apartamento_id", nullable = false)
     private UUID apartamentoId;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 1000)
     private String mensagem;
 
     @Column(name = "data_envio", nullable = false)
@@ -45,7 +52,9 @@ public class NotificacaoSchema {
                 this.dataEnvio
         );
         notificacao.setId(this.id);
-        if (this.lido) notificacao.marcarComoLida();
+        if (this.lido) {
+            notificacao.marcarComoLida();
+        }
         return notificacao;
     }
 }

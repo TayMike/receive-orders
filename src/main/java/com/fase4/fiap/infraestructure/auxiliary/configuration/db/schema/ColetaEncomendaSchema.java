@@ -32,9 +32,9 @@ public class ColetaEncomendaSchema implements Serializable {
     @NotNull(message = "Recebimento Encomenda ID não pode ser nulo")
     private UUID recebimentoEncomendaId;
 
-    @Column(name = "cpf_morador_coleta", nullable = false, length = 100)
+    @Column(name = "cpf_morador_coleta", nullable = false, length = 11)
     @NotBlank(message = "CPF não pode estar vazio")
-    @Pattern(regexp = "\\d{11}", message = "CPF deve conter apenas dígitos")
+    @Pattern(regexp = "\\d{11}", message = "CPF deve conter exatamente 11 dígitos")
     private String cpfMoradorColeta;
 
     @Column(nullable = false, length = 100)
@@ -44,12 +44,13 @@ public class ColetaEncomendaSchema implements Serializable {
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    @NotNull(message = "Data entrega não pode ser nula")
-    @PastOrPresent(message = "Data entrega deve ser passada ou presente")
+    @NotNull(message = "Data coleta não pode ser nula")
+    @PastOrPresent(message = "Data coleta deve ser passada ou presente")
     private OffsetDateTime dataColeta;
 
     public ColetaEncomendaSchema(ColetaEncomenda coletaEncomenda) {
-        this.id = coletaEncomenda.getRecebimentoEncomendaId();
+        this.id = coletaEncomenda.getId();
+        this.recebimentoEncomendaId = coletaEncomenda.getRecebimentoEncomendaId();
         this.cpfMoradorColeta = coletaEncomenda.getCpfMoradorColeta();
         this.nomeMoradorColeta = coletaEncomenda.getNomeMoradorColeta();
         this.dataColeta = coletaEncomenda.getDataColeta();
@@ -62,9 +63,7 @@ public class ColetaEncomendaSchema implements Serializable {
                 this.nomeMoradorColeta,
                 this.dataColeta
         );
-
-        coletaEncomenda.setId(this.getId());
+        coletaEncomenda.setId(this.id);
         return coletaEncomenda;
     }
-
 }

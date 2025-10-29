@@ -18,7 +18,6 @@ public class NotificacaoLeitura {
     private String ipAddress;
     private String userAgent;
 
-    // Construtor útil
     public NotificacaoLeitura(UUID notificacaoId, UUID moradorId, String ipAddress, String userAgent) {
         this.notificacaoId = notificacaoId;
         this.moradorId = moradorId;

@@ -1,6 +1,7 @@
 package com.fase4.fiap.infraestructure.message;
 
 import com.fase4.fiap.entity.message.notificacaoLeitura.gateway.NotificacaoLeituraGateway;
+import com.fase4.fiap.entity.message.notificacaoLeitura.model.NotificacaoLeitura;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,8 @@ public class NotificacaoLeituraController {
         String ip = getClientIp(request);
         String userAgent = request.getHeader("User-Agent");
 
-        notificacaoLeituraGateway.registrarLeitura(notificacaoId, moradorId, ip, userAgent);
+        NotificacaoLeitura notificacaoLeitura = new NotificacaoLeitura(notificacaoId, moradorId, ip, userAgent);
+        notificacaoLeituraGateway.save(notificacaoLeitura);
 
         // Retorna pixel 1x1 transparente
         byte[] pixel = new byte[]{

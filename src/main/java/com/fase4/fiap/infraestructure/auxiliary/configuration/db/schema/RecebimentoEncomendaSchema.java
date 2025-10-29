@@ -20,7 +20,9 @@ import java.util.UUID;
 @Table(
         name = "recebimento_encomenda",
         indexes = {
-                @Index(name = "idx_apartamento_id", columnList = "apartamento_id")
+                @Index(name = "idx_apartamento_id", columnList = "apartamento_id"),
+                @Index(name = "idx_data_entrega", columnList = "data_entrega DESC"),
+                @Index(name = "idx_estado_coleta", columnList = "estado_coleta")
         }
 )
 public class RecebimentoEncomendaSchema implements Serializable {
@@ -33,12 +35,12 @@ public class RecebimentoEncomendaSchema implements Serializable {
     @NotNull(message = "Apartamento ID não pode ser nulo")
     private UUID apartamentoId;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     @NotBlank(message = "Descrição não pode estar vazio")
-    @Size(max = 100, message = "Descrição deve ter no máximo 100 caracteres")
+    @Size(max = 255, message = "Descrição deve ter no máximo 255 caracteres")
     private String descricao;
 
-    @Column(nullable = false)
+    @Column(name = "data_entrega", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @NotNull(message = "Data entrega não pode ser nula")
     @PastOrPresent(message = "Data entrega deve ser passada ou presente")
@@ -64,9 +66,7 @@ public class RecebimentoEncomendaSchema implements Serializable {
                 this.dataEntrega,
                 this.estadoColeta
         );
-
-        recebimentoEncomenda.setId(this.getId());
+        recebimentoEncomenda.setId(this.id);
         return recebimentoEncomenda;
     }
-
 }

@@ -34,3 +34,4 @@ build/
 
 ### Critical Infos ###
 application-dev.yml
+.env

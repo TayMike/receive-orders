@@ -31,7 +31,7 @@ public class RecebimentoEncomenda extends AbstractEntity implements Serializable
     private EstadoColeta estadoColeta;
 
     public enum EstadoColeta {
-        PENDENTE, COLETADO
+        PENDENTE, COLETADA
     }
 
     public RecebimentoEncomenda(@NonNull UUID apartamentoId, @NonNull String descricao, @NonNull OffsetDateTime dataEntrega, @NonNull EstadoColeta estadoColeta) {

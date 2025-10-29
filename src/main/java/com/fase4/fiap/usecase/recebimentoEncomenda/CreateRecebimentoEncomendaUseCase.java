@@ -2,7 +2,6 @@ package com.fase4.fiap.usecase.recebimentoEncomenda;
 
 import com.fase4.fiap.entity.apartamento.exception.ApartamentoNotFoundException;
 import com.fase4.fiap.entity.apartamento.gateway.ApartamentoGateway;
-import com.fase4.fiap.entity.apartamento.model.Apartamento;
 import com.fase4.fiap.entity.message.notificacao.model.Notificacao;
 import com.fase4.fiap.entity.recebimentoEncomenda.gateway.RecebimentoEncomendaGateway;
 import com.fase4.fiap.entity.recebimentoEncomenda.model.RecebimentoEncomenda;

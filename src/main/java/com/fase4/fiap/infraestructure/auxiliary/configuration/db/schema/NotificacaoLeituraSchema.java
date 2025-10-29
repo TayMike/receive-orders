@@ -12,9 +12,16 @@ import java.util.UUID;
 @Entity
 @Table(
         name = "notificacao_leitura",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"notificacao_id", "morador_id"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"notificacao_id", "morador_id"}),
+        indexes = {
+                @Index(name = "idx_notificacao_leitura_notificacao", columnList = "notificacao_id"),
+                @Index(name = "idx_notificacao_leitura_morador", columnList = "morador_id"),
+                @Index(name = "idx_notificacao_leitura_lido_em", columnList = "lido_em DESC")
+        }
 )
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class NotificacaoLeituraSchema {
 
     @Id
@@ -46,11 +53,16 @@ public class NotificacaoLeituraSchema {
     }
 
     public NotificacaoLeitura toEntity() {
-        return new NotificacaoLeitura(
+        NotificacaoLeitura leitura = new NotificacaoLeitura(
                 this.notificacaoId,
                 this.moradorId,
                 this.ipAddress,
                 this.userAgent
         );
+        leitura.setLidoEm(this.lidoEm);
+        if (this.id != null) {
+            leitura.setId(this.id);
+        }
+        return leitura;
     }
 }
