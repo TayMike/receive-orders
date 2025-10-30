@@ -1,5 +1,6 @@
 package com.fase4.fiap.infraestructure.recebimentoEncomenda.controller;
 
+import com.fase4.fiap.entity.apartamento.exception.ApartamentoNotFoundException;
 import com.fase4.fiap.entity.recebimentoEncomenda.model.RecebimentoEncomenda;
 import com.fase4.fiap.infraestructure.recebimentoEncomenda.dto.RecebimentoEncomendaPublicData;
 import com.fase4.fiap.usecase.recebimentoEncomenda.SearchByApartamentoRecebimentoEncomendaUseCase;
@@ -23,7 +24,7 @@ public class SearchByApartamentoRecebimentoEncomendaController {
 
     @GetMapping("/api/recebimento-encomendas/apartamento/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<RecebimentoEncomendaPublicData> searchRecebimentoEncomenda(@PathVariable UUID apartamentoId) {
+    public List<RecebimentoEncomendaPublicData> searchRecebimentoEncomenda(@PathVariable UUID apartamentoId) throws ApartamentoNotFoundException {
         List<RecebimentoEncomenda> recebimentoEncomenda = searchByApartamentoRecebimentoEncomendaUseCase.execute(apartamentoId);
         return recebimentoEncomenda.stream().map(RecebimentoEncomendaPublicData::new).toList();
     }

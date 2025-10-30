@@ -6,8 +6,6 @@ import com.fase4.fiap.entity.message.notificacaoLeitura.model.NotificacaoLeitura
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-
 @Component
 public class NotificarLeituraUseCase {
 
@@ -22,11 +20,13 @@ public class NotificarLeituraUseCase {
     }
 
     @Transactional
-    public void execute(UUID notificacaoId, UUID moradorId, String ip, String userAgent) {
-        NotificacaoLeitura leitura = new NotificacaoLeitura(notificacaoId, moradorId, ip, userAgent);
-        notificacaoLeituraGateway.save(leitura);
+    public void execute(NotificacaoLeitura notificacaoLeitura) {
+        if (notificacaoLeitura == null) {
+            throw new IllegalArgumentException("NotificacaoLeitura não pode ser nula");
+        }
+        notificacaoLeituraGateway.save(notificacaoLeitura);
 
-        notificacaoGateway.findById(notificacaoId).ifPresent(notificacao -> {
+        notificacaoGateway.findById(notificacaoLeitura.getNotificacaoId()).ifPresent(notificacao -> {
             notificacao.marcarComoLida();
             notificacaoGateway.save(notificacao);
         });

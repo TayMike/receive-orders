@@ -37,8 +37,8 @@ public class MoradorDatabaseGateway implements MoradorGateway {
     }
 
     @Override
-    public List<Morador> findMoradorByApartamentoId(UUID apartamentoId) {
-        return moradorRepository.findMoradorByApartamentoId(apartamentoId).stream().map(MoradorSchema::toEntity).toList();
+    public List<Morador> findAllByApartamentoId(UUID apartamentoId) {
+        return moradorRepository.findAllByApartamentoId(apartamentoId).stream().map(MoradorSchema::toEntity).toList();
     }
 
     @Override

@@ -10,7 +10,7 @@ public interface MoradorGateway {
 
     Morador save(Morador morador);
     Optional<Morador> findById(UUID id);
-    List<Morador> findMoradorByApartamentoId(UUID apartamentoId);
+    List<Morador> findAllByApartamentoId(UUID apartamentoId);
     List<Morador> findAll();
     Morador update(Morador morador);
     void deleteById(UUID id);

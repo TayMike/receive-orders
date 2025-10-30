@@ -9,6 +9,10 @@ import com.fase4.fiap.usecase.message.publish.PublicarNotificacaoUseCase;
 import com.fase4.fiap.usecase.recebimentoEncomenda.dto.IRecebimentoEncomendaRegistrationData;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
+
+import static com.fase4.fiap.entity.recebimentoEncomenda.model.RecebimentoEncomenda.validacaoDataEntrega;
+
 public class CreateRecebimentoEncomendaUseCase {
 
     private final RecebimentoEncomendaGateway recebimentoEncomendaGateway;
@@ -24,15 +28,22 @@ public class CreateRecebimentoEncomendaUseCase {
     @Transactional
     public RecebimentoEncomenda execute(IRecebimentoEncomendaRegistrationData dados) throws ApartamentoNotFoundException {
 
+        validacaoDataEntrega(dados.dataEntrega());
+
         apartamentoGateway.findById(dados.apartamentoId())
                 .orElseThrow(() -> new ApartamentoNotFoundException("Apartamento not found: " + dados.apartamentoId()));
 
         RecebimentoEncomenda recebimentoEncomenda = new RecebimentoEncomenda(dados.apartamentoId(), dados.descricao(), dados.dataEntrega(), dados.estadoColeta());
 
+        String mensagem = "Nova encomenda recebida: " +
+                "\nDescrição: " +
+                dados.descricao() +
+                "\nData de Entrega: " +
+                dados.dataEntrega().toString();
         // Send notification to the apartment user
         Notificacao notificacao = new Notificacao(
                 dados.apartamentoId(),
-                "Nova encomenda recebida",
+                mensagem,
                 dados.dataEntrega()
         );
         publicarNotificacaoUseCase.publish(notificacao);

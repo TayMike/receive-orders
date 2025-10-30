@@ -2,6 +2,7 @@ package com.fase4.fiap.infraestructure.auxiliary.configuration.web;
 
 import com.fase4.fiap.entity.apartamento.gateway.ApartamentoGateway;
 import com.fase4.fiap.entity.coletaEncomenda.gateway.ColetaEncomendaGateway;
+import com.fase4.fiap.entity.message.email.gateway.EmailGateway;
 import com.fase4.fiap.entity.message.notificacao.gateway.NotificacaoGateway;
 import com.fase4.fiap.entity.message.notificacaoLeitura.gateway.NotificacaoLeituraGateway;
 import com.fase4.fiap.entity.morador.gateway.MoradorGateway;
@@ -23,6 +24,7 @@ import com.fase4.fiap.usecase.coletaEncomenda.GetColetaEncomendaUseCase;
 import com.fase4.fiap.usecase.coletaEncomenda.SearchColetaEncomendaUseCase;
 import com.fase4.fiap.usecase.message.NotificarLeituraUseCase;
 import com.fase4.fiap.usecase.message.publish.PublicarNotificacaoUseCase;
+import com.fase4.fiap.usecase.message.subscribe.ProcessarNotificacaoUseCase;
 import com.fase4.fiap.usecase.morador.*;
 import com.fase4.fiap.usecase.recebimentoEncomenda.*;
 import org.springframework.context.annotation.Bean;
@@ -78,9 +80,11 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     // --- ColetaEncomenda ---
     @Bean
-    public CreateColetaEncomendaUseCase createColetaEncomendaUseCase(ColetaEncomendaRepository coletaEncomendaRepository) {
+    public CreateColetaEncomendaUseCase createColetaEncomendaUseCase(ColetaEncomendaRepository coletaEncomendaRepository,
+                                                                     RecebimentoEncomendaRepository recebimentoEncomendaRepository) {
         ColetaEncomendaGateway coletaEncomendaGateway = new ColetaEncomendaDatabaseGateway(coletaEncomendaRepository);
-        return new CreateColetaEncomendaUseCase(coletaEncomendaGateway);
+        RecebimentoEncomendaGateway recebimentoEncomendaGateway = new RecebimentoEncomendaDatabaseGateway(recebimentoEncomendaRepository);
+        return new CreateColetaEncomendaUseCase(coletaEncomendaGateway, recebimentoEncomendaGateway);
     }
 
     @Bean
@@ -117,6 +121,14 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
+    public SearchByApartamentoMoradorUseCase searchMoradorByApartamentoIdUseCase(MoradorRepository moradorRepository,
+                                                                                 ApartamentoRepository apartamentoRepository) {
+        MoradorGateway moradorGateway = new MoradorDatabaseGateway(moradorRepository);
+        ApartamentoGateway apartamentoGateway = new ApartamentoDatabaseGateway(apartamentoRepository);
+        return new SearchByApartamentoMoradorUseCase(moradorGateway, apartamentoGateway);
+    }
+
+    @Bean
     public SearchMoradorUseCase searchMoradorUseCase(MoradorRepository moradorRepository) {
         MoradorGateway moradorGateway = new MoradorDatabaseGateway(moradorRepository);
         return new SearchMoradorUseCase(moradorGateway);
@@ -147,21 +159,17 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public SearchByApartamentoRecebimentoEncomendaUseCase searchByApartamentoRecebimentoEncomendaUseCase(RecebimentoEncomendaRepository recebimentoEncomendaRepository) {
+    public SearchByApartamentoRecebimentoEncomendaUseCase searchByApartamentoRecebimentoEncomendaUseCase(RecebimentoEncomendaRepository recebimentoEncomendaRepository,
+                                                                                                        ApartamentoRepository apartamentoRepository) {
         RecebimentoEncomendaGateway recebimentoEncomendaGateway = new RecebimentoEncomendaDatabaseGateway(recebimentoEncomendaRepository);
-        return new SearchByApartamentoRecebimentoEncomendaUseCase(recebimentoEncomendaGateway);
+        ApartamentoGateway apartamentoGateway = new ApartamentoDatabaseGateway(apartamentoRepository);
+        return new SearchByApartamentoRecebimentoEncomendaUseCase(recebimentoEncomendaGateway, apartamentoGateway);
     }
 
     @Bean
     public SearchRecebimentoEncomendaUseCase searchRecebimentoEncomendaUseCase(RecebimentoEncomendaRepository recebimentoEncomendaRepository) {
         RecebimentoEncomendaGateway recebimentoEncomendaGateway = new RecebimentoEncomendaDatabaseGateway(recebimentoEncomendaRepository);
         return new SearchRecebimentoEncomendaUseCase(recebimentoEncomendaGateway);
-    }
-
-    @Bean
-    public UpdateRecebimentoEncomendaUseCase updateRecebimentoEncomendaUseCase(RecebimentoEncomendaRepository recebimentoEncomendaRepository) {
-        RecebimentoEncomendaGateway recebimentoEncomendaGateway = new RecebimentoEncomendaDatabaseGateway(recebimentoEncomendaRepository);
-        return new UpdateRecebimentoEncomendaUseCase(recebimentoEncomendaGateway);
     }
 
     // --- Message ---
@@ -191,6 +199,13 @@ public class MvcConfiguration implements WebMvcConfigurer {
             NotificacaoRepository notificacaoRepository,
             NotificacaoProducer notificacaoProducer) {
         return new NotificacaoDatabaseGateway(notificacaoRepository, notificacaoProducer);
+    }
+
+    @Bean
+    public ProcessarNotificacaoUseCase processarNotificacaoUseCase(EmailGateway emailGateway,
+                                                                   MoradorGateway moradorGateway,
+                                                                   NotificacaoGateway notificacaoGateway) {
+        return new ProcessarNotificacaoUseCase(emailGateway, moradorGateway, notificacaoGateway);
     }
 
 }

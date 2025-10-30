@@ -1,7 +1,7 @@
 package com.fase4.fiap.infraestructure.message;
 
-import com.fase4.fiap.entity.message.notificacaoLeitura.gateway.NotificacaoLeituraGateway;
 import com.fase4.fiap.entity.message.notificacaoLeitura.model.NotificacaoLeitura;
+import com.fase4.fiap.usecase.message.NotificarLeituraUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +16,10 @@ import java.util.UUID;
 @RequestMapping("/api/notificacoes")
 public class NotificacaoLeituraController {
 
-    private final NotificacaoLeituraGateway notificacaoLeituraGateway;
+    private final NotificarLeituraUseCase notificarLeituraUseCase;
 
-    public NotificacaoLeituraController(NotificacaoLeituraGateway notificacaoLeituraGateway) {
-        this.notificacaoLeituraGateway = notificacaoLeituraGateway;
+    public NotificacaoLeituraController(NotificarLeituraUseCase notificarLeituraUseCase) {
+        this.notificarLeituraUseCase = notificarLeituraUseCase;
     }
 
     @GetMapping("/{notificacaoId}/lido/{moradorId}")
@@ -32,7 +32,7 @@ public class NotificacaoLeituraController {
         String userAgent = request.getHeader("User-Agent");
 
         NotificacaoLeitura notificacaoLeitura = new NotificacaoLeitura(notificacaoId, moradorId, ip, userAgent);
-        notificacaoLeituraGateway.save(notificacaoLeitura);
+        notificarLeituraUseCase.execute(notificacaoLeitura);
 
         // Retorna pixel 1x1 transparente
         byte[] pixel = new byte[]{

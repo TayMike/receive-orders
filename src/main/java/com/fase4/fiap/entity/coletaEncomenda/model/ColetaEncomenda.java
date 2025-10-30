@@ -35,4 +35,10 @@ public class ColetaEncomenda extends AbstractEntity implements Serializable {
         this.dataColeta = dataColeta;
     }
 
+    public static void validacaoDataColeta(OffsetDateTime dataColeta) {
+        if (dataColeta.isAfter(OffsetDateTime.now())) {
+            throw new IllegalArgumentException("Data de coleta não pode ser no futuro.");
+        }
+    }
+
 }

@@ -12,6 +12,9 @@ public class PublicarNotificacaoUseCase {
     }
 
     public void publish(Notificacao notificacao) {
+        if (notificacao == null) {
+            throw new IllegalArgumentException("Notificação não pode ser nula");
+        }
         notificacaoGateway.publish(notificacao);
     }
 

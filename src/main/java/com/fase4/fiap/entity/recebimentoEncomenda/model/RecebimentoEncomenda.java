@@ -41,4 +41,14 @@ public class RecebimentoEncomenda extends AbstractEntity implements Serializable
         this.estadoColeta = estadoColeta;
     }
 
+    public static void validacaoDataEntrega(OffsetDateTime dataEntrega) {
+        if (dataEntrega.isAfter(OffsetDateTime.now())) {
+            throw new IllegalArgumentException("Data de entrega não pode ser no futuro.");
+        }
+    }
+
+    public void atualizarEstadoColeta() {
+        this.estadoColeta = EstadoColeta.COLETADA;
+    }
+
 }

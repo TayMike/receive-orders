@@ -13,6 +13,6 @@ import java.util.UUID;
 public interface MoradorRepository extends JpaRepository<MoradorSchema, UUID> {
 
     @Query("SELECT m FROM MoradorSchema m WHERE :apartamentoId MEMBER OF m.apartamentoId")
-    List<MoradorSchema> findMoradorByApartamentoId(@Param("apartamentoId") UUID apartamentoId);
+    List<MoradorSchema> findAllByApartamentoId(@Param("apartamentoId") UUID apartamentoId);
 
 }
