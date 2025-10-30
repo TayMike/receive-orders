@@ -1,0 +1,49 @@
+{
+  "$id": "https://fiap.fase4.com/schemas/apartamento.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Apartamento",
+  "description": "Esquema JSON para representar um apartamento com torre, andar e número. A combinação (torre, andar, numero) deve ser única no banco de dados.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Identificador único do apartamento (UUID)",
+      "type": "string",
+      "format": "uuid",
+      "examples": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"]
+    },
+    "torre": {
+      "description": "Letra da torre (ex: 'A', 'B'). Tamanho exato de 1 caractere.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "^[A-Za-z]$",
+      "examples": ["A"]
+    },
+    "andar": {
+      "description": "Número do andar (1 a 127)",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 127,
+      "examples": [5]
+    },
+    "numero": {
+      "description": "Número do apartamento no andar (1 a 127)",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 127,
+      "examples": [42]
+    }
+  },
+  "required": ["torre", "andar", "numero"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "torre": "A",
+      "andar": 10,
+      "numero": 23
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$comment": "A combinação (torre, andar, numero) é única no banco de dados (UniqueConstraint). Não é validável diretamente no JSON Schema."
+}

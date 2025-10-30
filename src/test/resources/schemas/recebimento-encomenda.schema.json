@@ -1,0 +1,58 @@
+{
+  "$id": "https://fiap.fase4.com/schemas/recebimento-encomenda.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Recebimento de Encomenda",
+  "description": "Esquema JSON para registro do recebimento de uma encomenda no condomínio. Inclui apartamento, descrição, data de entrega e estado de coleta. Índices: apartamento_id, data_entrega (DESC), estado_coleta.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Identificador único do recebimento (UUID gerado automaticamente)",
+      "type": ["string", "null"],
+      "format": "uuid",
+      "examples": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"]
+    },
+    "apartamentoId": {
+      "description": "ID do apartamento que recebeu a encomenda",
+      "type": "string",
+      "format": "uuid",
+      "examples": ["a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8"]
+    },
+    "descricao": {
+      "description": "Descrição da encomenda (ex: 'Pacote Amazon', 'Carta registrada')",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "examples": ["Caixa de sapatos tamanho 38"]
+    },
+    "dataEntrega": {
+      "description": "Data e hora do recebimento da encomenda no formato ISO 8601 com offset",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}[+-]\\d{2}:\\d{2}$",
+      "examples": ["2025-04-05T14:30:00.000-03:00"]
+    },
+    "estadoColeta": {
+      "description": "Estado atual da coleta da encomenda",
+      "type": "string",
+      "enum": ["PENDENTE", "COLETADA", "EXPIRADA"],
+      "examples": ["PENDENTE"]
+    }
+  },
+  "required": [
+    "apartamentoId",
+    "descricao",
+    "dataEntrega",
+    "estadoColeta"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "apartamentoId": "a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8",
+      "descricao": "Pacote com livros",
+      "dataEntrega": "2025-04-05T10:15:30.123-03:00",
+      "estadoColeta": "PENDENTE"
+    }
+  ],
+  "$comment": "Índices no banco: idx_apartamento_id, idx_data_entrega (DESC), idx_estado_coleta. O campo 'estadoColeta' é um enum: PENDENTE, COLETADA, EXPIRADA."
+}

@@ -1,6 +1,5 @@
 package com.fase4.fiap.bdd;
 
-import com.fase4.fiap.FiapApplication;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.SelectClasspathResource;
@@ -12,7 +11,10 @@ import org.springframework.test.context.ActiveProfiles;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @CucumberContextConfiguration
-@SpringBootTest(classes = FiapApplication.class)
+@SpringBootTest(
+        classes = com.fase4.fiap.FiapApplication.class,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
 @ActiveProfiles("test")
 public class CucumberConfiguration {
 }

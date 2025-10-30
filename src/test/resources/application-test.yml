@@ -20,3 +20,21 @@ spring:
       continue-on-error: true
       encoding: UTF-8
       locations: classpath:init-h2.sql
+
+# EmailSender desabilitado para testes
+  mail:
+    host: localhost
+    port: 25
+    username: disabled
+    password: disabled
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+            required: false
+
+app:
+  url:
+    base: http://localhost:8080
