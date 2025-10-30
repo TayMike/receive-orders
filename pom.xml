@@ -18,6 +18,19 @@
         <cucumber.version>7.23.0</cucumber.version>
 		<spring-cloud.version>2025.0.0</spring-cloud.version>
 	</properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 	<dependencies>
         <!-- Spring & Docker -->
         <dependency>
@@ -194,20 +207,22 @@
             <scope>test</scope>
         </dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.5.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -1,0 +1,91 @@
+spring:
+  application:
+    name: fiap
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+  docker:
+    compose:
+      enabled: false
+
+  kafka:
+    consumer:
+      enabled: false
+      auto-startup: false
+    producer:
+      enabled: false
+    listener:
+      missing-topics-fatal: false
+    bootstrap-servers: localhost:9092
+
+  mail:
+    host: localhost
+    port: 25
+    username: disabled
+    password: disabled
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+            required: false
+
+  jmx:
+    enabled: true
+
+management:
+  health:
+    defaults:
+      enabled: false
+    db:
+      enabled: true
+    diskSpace:
+      enabled: true
+    ping:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  port: 8081
+
+app:
+  url:
+    base: http://localhost:8081
+
+debug: true
+
+logging:
+  level:
+    org.springframework: INFO
+    com.fase4: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE

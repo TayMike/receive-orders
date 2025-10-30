@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### Critical Infos ###
-application-dev.yml
+application-test.yml
 .env
