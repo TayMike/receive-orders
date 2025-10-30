@@ -20,7 +20,7 @@ public class DeleteApartamentoController {
     }
 
     @DeleteMapping("/api/apartamentos/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteApartamento(@PathVariable UUID id) throws ApartamentoNotFoundException {
         deleteApartamentoUserCase.execute(id);
     }

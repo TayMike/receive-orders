@@ -142,6 +142,11 @@ public class MvcConfiguration implements WebMvcConfigurer {
         return new UpdateMoradorUseCase(moradorGateway, apartamentoGateway);
     }
 
+    @Bean
+    public MoradorGateway moradorGateway(MoradorRepository moradorRepository) {
+        return new MoradorDatabaseGateway(moradorRepository);
+    }
+
     // --- RecebimentoEncomenda ---
     @Bean
     public CreateRecebimentoEncomendaUseCase createRecebimentoEncomendaUseCase(RecebimentoEncomendaRepository recebimentoEncomendaRepository,

@@ -20,7 +20,7 @@ public class DeleteMoradorController {
     }
 
     @DeleteMapping("/api/moradores/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMorador(@PathVariable UUID id) throws MoradorNotFoundException {
         deleteMoradorUserCase.execute(id);
     }

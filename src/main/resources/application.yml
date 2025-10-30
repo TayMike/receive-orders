@@ -1,5 +1,3 @@
 spring:
-  application
-    name=fiap
-server:
-  port=8080
+  profiles:
+    active: dev

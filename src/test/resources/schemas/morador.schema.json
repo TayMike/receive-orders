@@ -1,0 +1,7 @@
+{
+  "cpf": "${cpf}",
+  "nome": "${nome}",
+  "telefone": ["${telefone1}"],
+  "email": "${email}",
+  "apartamentoId": ["${apt1}"]
+}
