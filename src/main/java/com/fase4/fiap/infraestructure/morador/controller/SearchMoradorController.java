@@ -22,8 +22,8 @@ public class SearchMoradorController {
     @GetMapping("/api/moradores")
     @ResponseStatus(HttpStatus.OK)
     public List<MoradorPublicData> searchMorador() {
-        List<Morador> insumos = this.searchMoradorUseCase.execute();
-        return insumos.stream().map(MoradorPublicData::new).toList();
+        List<Morador> moradores = this.searchMoradorUseCase.execute();
+        return moradores.stream().map(MoradorPublicData::new).toList();
     }
 
 }

@@ -22,8 +22,8 @@ public class SearchApartamentoController {
     @GetMapping("/api/apartamentos")
     @ResponseStatus(HttpStatus.OK)
     public List<ApartamentoPublicData> searchApartamento() {
-        List<Apartamento> insumos = this.searchApartamentoUseCase.execute();
-        return insumos.stream().map(ApartamentoPublicData::new).toList();
+        List<Apartamento> apartamentos = this.searchApartamentoUseCase.execute();
+        return apartamentos.stream().map(ApartamentoPublicData::new).toList();
     }
 
 }

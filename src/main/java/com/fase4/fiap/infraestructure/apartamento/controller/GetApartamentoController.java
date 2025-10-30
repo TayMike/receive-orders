@@ -24,8 +24,8 @@ public class GetApartamentoController {
     @GetMapping("/api/apartamentos/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ApartamentoPublicData getApartamento(@PathVariable UUID id) throws ApartamentoNotFoundException {
-        Apartamento insumo = getApartamentoUseCase.execute(id);
-        return new ApartamentoPublicData(insumo);
+        Apartamento apartamento = getApartamentoUseCase.execute(id);
+        return new ApartamentoPublicData(apartamento);
     }
 
 }

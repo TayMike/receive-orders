@@ -11,6 +11,7 @@ public record MoradorPublicData(
         String cpf,
         String nome,
         List<String> telefone,
+        String email,
         List<UUID> apartamentoId
 ) implements IMoradorPublicData {
 
@@ -20,6 +21,7 @@ public record MoradorPublicData(
                 morador.getCpf(),
                 morador.getNome(),
                 morador.getTelefone(),
+                morador.getEmail(),
                 morador.getApartamentoId()
         );
     }

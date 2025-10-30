@@ -25,8 +25,8 @@ public class SearchMoradorByApartamentoIdController {
     @GetMapping("/api/moradores/apartamentos/{apartamentoId}")
     @ResponseStatus(HttpStatus.OK)
     public List<MoradorPublicData> searchMoradorByApartamentoId(@PathVariable UUID apartamentoId) throws ApartamentoNotFoundException {
-        List<Morador> insumos = this.searchByApartamentoMoradorUseCase.execute(apartamentoId);
-        return insumos.stream().map(MoradorPublicData::new).toList();
+        List<Morador> moradores = this.searchByApartamentoMoradorUseCase.execute(apartamentoId);
+        return moradores.stream().map(MoradorPublicData::new).toList();
     }
 
 }

@@ -49,7 +49,7 @@ public class SearchApartamentoBDD {
     }
 
     @Quando("os apartamentos forem buscados - Search")
-    public void os_apartamentos_foream_buscados() {
+    public void os_apartamentos_forem_buscados() {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()

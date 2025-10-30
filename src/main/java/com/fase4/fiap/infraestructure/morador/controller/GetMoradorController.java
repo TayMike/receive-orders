@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+@RestController
 public class GetMoradorController {
 
     private final GetMoradorUseCase getMoradorUseCase;
@@ -22,8 +24,8 @@ public class GetMoradorController {
     @GetMapping("/api/moradores/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MoradorPublicData getMorador(@PathVariable UUID id) throws MoradorNotFoundException {
-        Morador insumo = getMoradorUseCase.execute(id);
-        return new MoradorPublicData(insumo);
+        Morador morador = getMoradorUseCase.execute(id);
+        return new MoradorPublicData(morador);
     }
 
 }
