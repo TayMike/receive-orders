@@ -2,6 +2,12 @@ spring:
   application:
     name: fiap
 
+  mvc:
+    static-path-pattern: /swagger-ui/**
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa

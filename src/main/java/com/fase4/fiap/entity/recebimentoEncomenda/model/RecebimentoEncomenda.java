@@ -1,6 +1,7 @@
 package com.fase4.fiap.entity.recebimentoEncomenda.model;
 
 import com.fase4.fiap.entity.auxiliary.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
@@ -31,7 +32,12 @@ public class RecebimentoEncomenda extends AbstractEntity implements Serializable
     private EstadoColeta estadoColeta;
 
     public enum EstadoColeta {
-        PENDENTE, COLETADA
+        PENDENTE, COLETADA;
+
+        @JsonValue
+        public String getValue() {
+            return this.name();
+        }
     }
 
     public RecebimentoEncomenda(@NonNull UUID apartamentoId, @NonNull String descricao, @NonNull OffsetDateTime dataEntrega, @NonNull EstadoColeta estadoColeta) {

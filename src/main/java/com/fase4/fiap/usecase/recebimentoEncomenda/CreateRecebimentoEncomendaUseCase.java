@@ -9,8 +9,6 @@ import com.fase4.fiap.usecase.message.publish.PublicarNotificacaoUseCase;
 import com.fase4.fiap.usecase.recebimentoEncomenda.dto.IRecebimentoEncomendaRegistrationData;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
-
 import static com.fase4.fiap.entity.recebimentoEncomenda.model.RecebimentoEncomenda.validacaoDataEntrega;
 
 public class CreateRecebimentoEncomendaUseCase {

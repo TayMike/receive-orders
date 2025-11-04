@@ -183,7 +183,7 @@ class ProcessarNotificacaoUseCaseTest {
         );
     }
 
-    private Morador createMorador(String email, UUID id) {
+    private Morador createMorador(String email) {
         Morador morador = mock(Morador.class);
         when(morador.getEmail()).thenReturn(email);
         return morador;
