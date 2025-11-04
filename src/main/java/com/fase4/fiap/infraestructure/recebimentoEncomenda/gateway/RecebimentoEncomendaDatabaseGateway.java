@@ -37,7 +37,7 @@ public class RecebimentoEncomendaDatabaseGateway implements RecebimentoEncomenda
     }
 
     @Override
-    @Cacheable(value = "recebimentoEncomendasByApartamentoId", key = "'recebimentoEncomendasByApartamentoId'")
+    @Cacheable(value = "recebimentoEncomendasByApartamentoId", key = "#id")
     public List<RecebimentoEncomenda> findAllByApartamentoId(UUID id) {
         return recebimentoEncomendaRepository.findAllByApartamentoId(id).stream().map(RecebimentoEncomendaSchema::toEntity).toList();
     }

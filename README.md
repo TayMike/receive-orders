@@ -61,6 +61,9 @@ docker-compose up --build app
 - Runs the MySQL database and the application on port `8080`.
 - To run in the background: `docker-compose up -d --build app`.
 
+Swagger Doc
+- http://localhost:8080/swagger-ui/index.html
+
 ### Run in Development Mode
 
 Start the application with the `dev` profile (uses `application-dev.yml`):
@@ -72,6 +75,9 @@ docker-compose up --build app-dev
 
 - Runs the MySQL database and the application on port `8081`.
 - To run in the background: `docker-compose up -d --build app-dev`.
+
+Swagger Doc
+- http://localhost:8081/swagger-ui/index.html
 
 ### Stop and Remove Containers
 

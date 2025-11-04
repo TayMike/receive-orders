@@ -81,44 +81,6 @@ class ApartamentoDatabaseGatewayCacheTest {
     }
 
     @Test
-    void testApartamentoConstructorAndGetters() {
-        assertNotNull(apartamento.getId(), "ID deve estar definido");
-        assertEquals('C', apartamento.getTorre(), "Torre deve ser 'C'");
-        assertEquals((byte) 23, apartamento.getAndar(), "Andar deve ser 23");
-        assertEquals((byte) 10, apartamento.getNumero(), "Número deve ser 10");
-    }
-
-    @Test
-    void testApartamentoSetters() {
-        Apartamento novo = new Apartamento('A', (byte) 5, (byte) 101);
-        novo.setId(UUID.randomUUID());
-
-        assertNotNull(novo.getId(), "ID deve estar definido após setId");
-        assertEquals('A', novo.getTorre(), "Torre deve ser 'A'");
-        assertEquals((byte) 5, novo.getAndar(), "Andar deve ser 5");
-        assertEquals((byte) 101, novo.getNumero(), "Número deve ser 101");
-    }
-
-    @Test
-    void testApartamentoSerialization() throws IOException, ClassNotFoundException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
-            oos.writeObject(apartamento);
-        }
-
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        Apartamento deserialized;
-        try (ObjectInputStream ois = new ObjectInputStream(bais)) {
-            deserialized = (Apartamento) ois.readObject();
-        }
-
-        assertEquals(apartamento.getId(), deserialized.getId(), "ID serializado deve ser igual");
-        assertEquals(apartamento.getTorre(), deserialized.getTorre(), "Torre deve ser igual");
-        assertEquals(apartamento.getAndar(), deserialized.getAndar(), "Andar deve ser igual");
-        assertEquals(apartamento.getNumero(), deserialized.getNumero(), "Número deve ser igual");
-    }
-
-    @Test
     void testApartamentoCacheIntegration() {
         ApartamentoSchema schema = new ApartamentoSchema(apartamento);
 

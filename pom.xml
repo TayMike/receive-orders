@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fase4</groupId>
 	<artifactId>fiap</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>fiap</name>
 	<description>fiap fase 4</description>
 	<properties>
@@ -202,9 +202,14 @@
 
         <!-- Documentação API -->
         <dependency>
-            <groupId>org.springframework.restdocs</groupId>
-            <artifactId>spring-restdocs-mockmvc</artifactId>
-            <scope>test</scope>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
         </dependency>
 	</dependencies>
 

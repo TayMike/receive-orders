@@ -14,17 +14,17 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-public class SearchMoradorByApartamentoIdController {
+public class SearchByApartamentoMoradorController {
 
     private final SearchByApartamentoMoradorUseCase searchByApartamentoMoradorUseCase;
 
-    public SearchMoradorByApartamentoIdController(SearchByApartamentoMoradorUseCase searchByApartamentoMoradorUseCase) {
+    public SearchByApartamentoMoradorController(SearchByApartamentoMoradorUseCase searchByApartamentoMoradorUseCase) {
         this.searchByApartamentoMoradorUseCase = searchByApartamentoMoradorUseCase;
     }
 
     @GetMapping("/api/moradores/apartamentos/{apartamentoId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<MoradorPublicData> searchMoradorByApartamentoId(@PathVariable UUID apartamentoId) throws ApartamentoNotFoundException {
+    public List<MoradorPublicData> searchByApartamentoMorador(@PathVariable UUID apartamentoId) throws ApartamentoNotFoundException {
         List<Morador> moradores = this.searchByApartamentoMoradorUseCase.execute(apartamentoId);
         return moradores.stream().map(MoradorPublicData::new).toList();
     }

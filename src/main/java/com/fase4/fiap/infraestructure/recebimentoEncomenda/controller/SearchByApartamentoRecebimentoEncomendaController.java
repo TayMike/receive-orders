@@ -22,7 +22,7 @@ public class SearchByApartamentoRecebimentoEncomendaController {
         this.searchByApartamentoRecebimentoEncomendaUseCase = searchByApartamentoRecebimentoEncomendaUseCase;
     }
 
-    @GetMapping("/api/recebimento-encomendas/apartamento/{id}")
+    @GetMapping("/api/recebimento-encomendas/apartamento/{apartamentoId}")
     @ResponseStatus(HttpStatus.OK)
     public List<RecebimentoEncomendaPublicData> searchRecebimentoEncomenda(@PathVariable UUID apartamentoId) throws ApartamentoNotFoundException {
         List<RecebimentoEncomenda> recebimentoEncomenda = searchByApartamentoRecebimentoEncomendaUseCase.execute(apartamentoId);

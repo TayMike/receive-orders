@@ -49,8 +49,8 @@ class ProcessarNotificacaoUseCaseTest {
         UUID morador1Id = UUID.randomUUID();
         UUID morador2Id = UUID.randomUUID();
 
-        Morador morador1 = createMorador("joao@email.com", morador1Id);
-        Morador morador2 = createMorador("maria@email.com", morador2Id);
+        Morador morador1 = createMorador("joao@email.com");
+        Morador morador2 = createMorador("maria@email.com");
 
         when(morador1.getId()).thenReturn(morador1Id);
         when(morador2.getId()).thenReturn(morador2Id);
@@ -83,7 +83,7 @@ class ProcessarNotificacaoUseCaseTest {
     @DisplayName("Não deve enviar e-mail nem salvar se não houver moradores")
     void shouldDoNothingWhenNoMoradores() {
         Notificacao notificacao = mock(Notificacao.class);
-        when(notificacao.getApartamentoId()).thenReturn(apartamentoId); // Só isso é usado
+        when(notificacao.getApartamentoId()).thenReturn(apartamentoId);
 
         when(moradorGateway.findAllByApartamentoId(apartamentoId))
                 .thenReturn(Collections.emptyList());
@@ -100,8 +100,8 @@ class ProcessarNotificacaoUseCaseTest {
         Notificacao notificacao = createNotificacao();
         UUID validId = UUID.randomUUID();
 
-        Morador moradorSemEmail = createMorador("   ", UUID.randomUUID());
-        Morador moradorComEmail = createMorador("valid@email.com", validId);
+        Morador moradorSemEmail = createMorador("   ");
+        Morador moradorComEmail = createMorador("valid@email.com");
 
         when(moradorComEmail.getId()).thenReturn(validId);
 
@@ -127,8 +127,8 @@ class ProcessarNotificacaoUseCaseTest {
     @DisplayName("Deve continuar processando outros moradores se um envio falhar")
     void shouldContinueOnEmailFailure() {
         Notificacao notificacao = createNotificacao();
-        Morador morador1 = createMorador("erro@email.com", UUID.randomUUID());
-        Morador morador2 = createMorador("ok@email.com", UUID.randomUUID());
+        Morador morador1 = createMorador("erro@email.com");
+        Morador morador2 = createMorador("ok@email.com");
 
         when(moradorGateway.findAllByApartamentoId(apartamentoId))
                 .thenReturn(List.of(morador1, morador2));
@@ -148,7 +148,7 @@ class ProcessarNotificacaoUseCaseTest {
     @DisplayName("Não deve salvar notificação se o envio de e-mail falhar")
     void shouldNotSaveNotificationOnEmailFailure() {
         Notificacao notificacao = createNotificacao();
-        Morador morador = createMorador("fail@email.com", UUID.randomUUID());
+        Morador morador = createMorador("fail@email.com");
 
         when(moradorGateway.findAllByApartamentoId(apartamentoId))
                 .thenReturn(List.of(morador));
@@ -166,7 +166,7 @@ class ProcessarNotificacaoUseCaseTest {
     @DisplayName("Deve formatar assunto com data correta")
     void shouldFormatSubjectWithCorrectDate() {
         Notificacao notificacao = createNotificacao();
-        Morador morador = createMorador("test@email.com", UUID.randomUUID());
+        Morador morador = createMorador("test@email.com");
 
         when(moradorGateway.findAllByApartamentoId(apartamentoId))
                 .thenReturn(List.of(morador));
@@ -183,7 +183,7 @@ class ProcessarNotificacaoUseCaseTest {
         );
     }
 
-    private Morador createMorador(String email, UUID id) {
+    private Morador createMorador(String email) {
         Morador morador = mock(Morador.class);
         when(morador.getEmail()).thenReturn(email);
         return morador;
