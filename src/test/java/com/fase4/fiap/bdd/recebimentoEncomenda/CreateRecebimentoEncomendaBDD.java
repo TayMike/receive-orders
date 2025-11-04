@@ -6,7 +6,6 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,18 +25,14 @@ public class CreateRecebimentoEncomendaBDD {
     @LocalServerPort
     private int port;
 
-    @Value("${server.servlet.context-path:}")
-    private String contextPath;
-
     @Dado("que foi criado um recebimentoEncomenda cadastrado - Criar")
     public void que_foi_criado_um_recebimento_encomenda_cadastrado() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        RestAssured.basePath = contextPath;
 
         String apartamentoJson = """
                 {
-                    "torre": "A",
+                    "torre": "M",
                     "andar": "20",
                     "numero": "1"
                 }

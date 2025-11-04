@@ -5,7 +5,6 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,19 +21,15 @@ public class SearchByApartamentoMoradorBDD {
     @LocalServerPort
     private int port;
 
-    @Value("${server.servlet.context-path:}")
-    private String contextPath;
-
     @Dado("que existem vários moradores cadastrados - SearchByApartamentoMorador")
     public void que_existem_varios_moradores_cadastrados() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        RestAssured.basePath = contextPath;
 
         for (int i = 1; i <= 2; i++) {
             String apartamentoJson = String.format("""
                     {
-                        "torre": "A",
+                        "torre": "J",
                         "andar": "20",
                         "numero": "1%d"
                     }
@@ -51,7 +46,7 @@ public class SearchByApartamentoMoradorBDD {
 
             String moradorJson = String.format("""
                 {
-                    "cpf": "1234567890%d",
+                    "cpf": "1234567891%d",
                     "nome": "Teste Total",
                     "telefone": ["11999999999"],
                     "email": "teste@hotmail.com",

@@ -5,7 +5,6 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,19 +23,15 @@ public class SearchRecebimentoEncomendaBDD {
     @LocalServerPort
     private int port;
 
-    @Value("${server.servlet.context-path:}")
-    private String contextPath;
-
     @Dado("que existem vários recebimentoEncomenda cadastrados - Search")
     public void que_existem_varios_recebimento_encomenda_cadastrados() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        RestAssured.basePath = contextPath;
 
         for (int i = 1; i <= 2; i++) {
             String apartamentoJson = String.format("""
                     {
-                        "torre": "A",
+                        "torre": "P",
                         "andar": "20",
                         "numero": "1%d"
                     }
@@ -54,7 +49,7 @@ public class SearchRecebimentoEncomendaBDD {
             String recebimentoEncomendaJson = String.format("""
                 {
                     "apartamentoId": "%s",
-                    "descricao": "Teste%d",
+                    "descricao": "Test%d",
                     "dataEntrega": "%s",
                     "estadoColeta": "PENDENTE"
                 }

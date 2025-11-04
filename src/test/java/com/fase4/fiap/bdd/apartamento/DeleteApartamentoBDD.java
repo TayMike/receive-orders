@@ -5,7 +5,6 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,18 +19,14 @@ public class DeleteApartamentoBDD {
     @LocalServerPort
     private int port;
 
-    @Value("${server.servlet.context-path:}")
-    private String contextPath;
-
     @Dado("que existe um apartamento cadastrado - Delete")
     public void que_existe_um_apartamento_cadastrado() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        RestAssured.basePath = contextPath;
 
         String apartamentoJson = """
             {
-                "torre": "A",
+                "torre": "B",
                 "andar": "20",
                 "numero": "1"
             }

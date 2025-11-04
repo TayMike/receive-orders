@@ -117,10 +117,16 @@ mvn spring-boot:run
 mvn clean gatling:test -Pperformance
 ```
 
-### Run Unit Tests
+### Run Tests
 
 ```bash
 mvn test
+```
+
+### Report
+
+```bash
+mvn site
 ```
 
 ## Docker Compose Configuration

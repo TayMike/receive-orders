@@ -5,7 +5,6 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,18 +19,14 @@ public class DeleteMoradorBDD {
     @LocalServerPort
     private int port;
 
-    @Value("${server.servlet.context-path:}")
-    private String contextPath;
-
     @Dado("que existe um morador cadastrado - Delete")
     public void que_existe_um_morador_cadastrado() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
-        RestAssured.basePath = contextPath;
 
         String apartamentoJson = """
                 {
-                    "torre": "A",
+                    "torre": "H",
                     "andar": "20",
                     "numero": "1"
                 }
@@ -47,7 +42,7 @@ public class DeleteMoradorBDD {
 
         String moradorJson = String.format("""
                 {
-                    "cpf": "12345678900",
+                    "cpf": "12345678901",
                     "nome": "Teste Total",
                     "telefone": ["11999999999"],
                     "email": "teste@hotmail.com",
