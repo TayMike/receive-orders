@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko/20100101 Firefox/144.0" version="28.2.9">
+  <diagram name="Page-1" id="0_1HBZqwKf6FuM9R-bYd">
+    <mxGraphModel dx="1426" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-1" value="Serviços externos" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f8f8;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="740" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-4" value="Envio de emails&lt;br&gt;SMTP" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#8e24aa;" parent="sroZeLDoB-8JMCB5YNTx-1" vertex="1">
+          <mxGeometry x="295" y="50" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-5" value="Aplicação" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f8f8;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="40" y="260" width="740" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-6" value="API de encomendas residenciais&lt;br&gt;Java / Sping Boot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;" parent="1" vertex="1">
+          <mxGeometry x="320" y="290" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-7" value="Dados" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8f8f8;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="40" y="400" width="740" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-8" value="&lt;div&gt;Banco de dados&lt;/div&gt;&lt;div&gt;MySQL&lt;/div&gt;" style="shape=cylinder;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;" parent="1" vertex="1">
+          <mxGeometry x="340" y="430" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-9" value="&lt;div&gt;Clientes&lt;/div&gt;&lt;div&gt;Web e Mobile&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;" parent="1" vertex="1">
+          <mxGeometry x="500" y="540" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-11" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#666666;" parent="1" source="sroZeLDoB-8JMCB5YNTx-9" target="sroZeLDoB-8JMCB5YNTx-6" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="560" as="sourcePoint" />
+            <mxPoint x="400" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-13" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#666666;labelBackgroundColor=#ffffff;" parent="1" source="sroZeLDoB-8JMCB5YNTx-6" target="sroZeLDoB-8JMCB5YNTx-8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="350" as="sourcePoint" />
+            <mxPoint x="400" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sroZeLDoB-8JMCB5YNTx-16" value="Envio de notificações" style="endArrow=classic;html=1;rounded=0;strokeColor=#666666;labelBackgroundColor=#ffffff;entryX=0.55;entryY=0.95;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="sroZeLDoB-8JMCB5YNTx-6" target="sroZeLDoB-8JMCB5YNTx-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="320" as="sourcePoint" />
+            <mxPoint x="400" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
